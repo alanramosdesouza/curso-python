@@ -12,6 +12,9 @@ while True:
 
     if opcao == "1":
         cep = input("Digite o CEP (somente números): ")
+        if len(cep) != 8 or not cep.isdigit():
+            print("CEP inválido. Digite exatamente 8 números.")
+            continue
         dados = consultar_cep(cep)
         if dados is None:
             print("CEP não encontrado ou inválido.")
