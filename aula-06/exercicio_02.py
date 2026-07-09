@@ -2,16 +2,20 @@ class Produto:
     def __init__(self, nome, preco, quantidade):
         self.nome = nome
         self.preco = preco
-        self.quantidade = quantidade
+        self._quantidade = quantidade
+    
+    @property
+    def quantidade(self):
+       return self._quantidade
 
     def calcular_valor_total(self):
-        return self.preco * self.quantidade
-    
+        return self.preco * self._quantidade
+
     def vender(self, quantidade_vendida):
         if quantidade_vendida <= 0:
             print('Quantidade inválida.')
-        elif quantidade_vendida <= self.quantidade:
-            self.quantidade -= quantidade_vendida
+        elif quantidade_vendida <= self._quantidade:
+            self._quantidade -= quantidade_vendida
             print('Venda realizada.')
         else:
             print('Estoque insuficiente.')
@@ -20,7 +24,7 @@ class Produto:
         if quantidade_reposta <= 0:
             print('Quantidade inválida.')
         else:
-            self.quantidade += quantidade_reposta
+            self._quantidade += quantidade_reposta
             print('Estoque atualizado.')
 
 livro = Produto("Livro", 50.00, 3)
@@ -36,6 +40,7 @@ print(f'Total em estoque: R$ {total_livro:.2f}')
 
 livro.vender(2)
 
+
 print(f"Quantidade restante: {livro.quantidade}")
 
 livro.repor(5)
@@ -43,3 +48,5 @@ print(f"Quantidade atualizada: {livro.quantidade}")
 
 livro.repor(-3)
 print(f"Quantidade após tentativa inválida: {livro.quantidade}")
+
+print(livro.quantidade)
